@@ -140,3 +140,13 @@ Some of the advantages of Spring Boot over Spring in the context of deployment i
 ### Initializing a Spring Boot app
 
 https://start.spring.io/
+
+Choose
+- Build: Maven
+- Language: Java
+- Version: 2.75
+- Packaging: Jar
+- Java 17
+- Dependencies
+    - Spring Web
+    - Spring Data JPA
