@@ -15,15 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest()
-                .permitAll()
-                .and()
-                .csrf()
-                .disable();
-        return http.build();
-    }
 
     @Bean
     public SecurityFilterChain filterChain2(HttpSecurity http) throws Exception {
@@ -32,12 +23,13 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
-                .antMatchers("/", "/login*", "/api/**")
+                .antMatchers("/", "/login*", "/api/**", "/actuator", "/actuator/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                ;
         return http.build();
     }
 

@@ -1,6 +1,7 @@
 # Thymeleaf Project
 
-##Lets add security
+##Lets add security  
+Reference: https://www.baeldung.com/spring-security-login
 
 pom.xml
 
@@ -109,7 +110,7 @@ Lets Change the FilterChain in SecurityConfig
                 .authorizeRequests()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
-                .antMatchers("/", "/login*", "/api*")
+                .antMatchers("/", "/login*", "/api/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
