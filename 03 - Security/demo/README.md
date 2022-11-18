@@ -3,6 +3,12 @@
 ## Lets add actuators
 Reference: https://www.baeldung.com/spring-boot-actuators
 
+By default there is a simple in memory instance of a MeterRegistry added. You can also target Prometheus, Datadog and manymore.
+This is usually done by adding the correct depenceny and maybe changing the MeterRegistry accordingly, when not possible through configuration
+
+More about this here:
+https://www.baeldung.com/spring-boot-self-hosted-monitoring
+
 add the following to the pom.xml
 ```xml
 <dependency>
@@ -40,3 +46,29 @@ management.endpoints.web.exposure.include=*
 - /sessions lists HTTP sessions given we are using Spring Session.
 - /shutdown performs a graceful shutdown of the application.
 - /threaddump dumps the thread information of the underlying JVM.
+
+##Lets add a simple Monitor
+
+add this above the homePage method in SimpleController
+```java
+@Timed("controllers.homepage")
+```
+
+## Lets add a Gauge
+
+In SimpleController add the following
+
+```java
+private final MeterRegistry meterRegistry;
+    private final AtomicInteger gauge;
+
+    public SimpleController(MeterRegistry meterRegistry){
+        this.meterRegistry = meterRegistry;
+        gauge =  meterRegistry.gauge("controller.homepage.gauge", Arrays.asList(), new AtomicInteger());
+    } 
+```
+
+To the homepage method add then
+```java
+gauge.set(new Random().nextInt(10));
+```
