@@ -1,6 +1,11 @@
 #Actuators
 
 ## Lets now add Persistence
+Reference: 
+- https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+- https://www.baeldung.com/spring-data-repositories
+- https://docs.spring.io/spring-data/data-commons/docs/2.7.6/reference/html/#repositories
+
 
 Since we already added the data starter, we can directly start adding an Entity
 
